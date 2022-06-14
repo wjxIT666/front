@@ -1,0 +1,18 @@
+{
+  "name": "20220613_wutils",
+  "version": "1.0.1",
+  "description": "wUtils工具包",
+  "main": "./dist/20220613_wUtils.js",
+  "scripts": {
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
