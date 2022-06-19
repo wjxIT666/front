@@ -1,6 +1,6 @@
 {
   "name": "20220613_wutils",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "wUtils工具包",
   "main": "./dist/20220613_wUtils.js",
   "scripts": {

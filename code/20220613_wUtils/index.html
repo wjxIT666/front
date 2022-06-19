@@ -12,9 +12,39 @@
     <button id="throttle">节流</button>
     <button id="debounce">防抖</button>
     <script>
-        let arr = ['red', 'yellow', 'blue'];
-        let result = wUtils.slice(arr, 0, 2);
-        console.log(result);
+        // 拷贝数组
+        let arr = ['red', { color: 'blue' }];
+        let arr2 = wUtils.shallowClone(arr);
+        console.log(arr2, arr === arr2, arr[1] === arr2[1]); //false true
+
+        // 拷贝对象
+        let obj = { name: '小明', sister: { name: '小花' } };
+        let obj2 = wUtils.shallowClone(obj);
+        console.log(obj2, obj === obj2, obj.sister === obj2.sister); //false true
+
+        // 拷贝对象 --- 深拷贝
+        let deepObj = {
+            a: '小明',
+            b: ['red', 'yellow', 'blue'],
+            c: { name: '小明', age: 18 },
+            d: function () {}
+        };
+
+        deepObj.b.push(deepObj.c);
+        deepObj.c.j = deepObj.b;
+
+        let cloneObj = wUtils.deepClone(deepObj);
+        console.log(cloneObj, deepObj.b === cloneObj.b, deepObj.c === cloneObj.c, deepObj.d === cloneObj.d); // false false true
+
+        // String
+        let str1 = 'ancd';
+        let str1Res = wUtils.stringReverse(str1);
+        console.log(str1Res);
+
+        let str2 = 'abcde';
+        let strRes1 = wUtils.overStep(str2, 3);
+        let strRes2 = wUtils.overStep(str2, 7);
+        console.log(strRes1, strRes2);
     </script>
 </body>
 </html>
