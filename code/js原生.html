@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body onload="load()">
+<pre>
+    <code id="showcode">
+ 
+    </code>
+</pre>
+<script id="sourcecode" type="text/javascript">
+
+    /**
+     * 类定义方式一，需要new来实现实例
+     * @constructor
+     */
+    var CheckObject = function(){};
+    CheckObject.prototype = {
+        checkName:function(){
+            console.log('checkName');
+            return this;
+        },
+        checkPasswd:function(){
+            console.log('checkPasswd');
+            return this;
+        },
+        checkEmail:function(){
+            console.log('checkEmail');
+            return this;
+        },
+    }
+
+    /**
+     * 类定义二，使用立即函数，不需要进行new，可以直接使用类名进行直接使用
+     * @type {{checkPasswd: function(): this, checkName: function(): this, checkEmail: function(): this}}
+     */
+    var CheckObject2 = (function(){
+        return {
+            checkName:function(){
+                setTimeout(()=>{
+                        console.log('checkName2');
+                    }, 1000
+                )
+
+                return this;
+            },
+            checkPasswd:function(){
+                console.log('checkPasswd2');
+                return this;
+            },
+            checkEmail:function(){
+                console.log('checkEmail2');
+                return this;
+            },
+        }
+    })();
+
+
+    /**
+     * 类定义三，扩展Function，动态添加方法
+     * @param name
+     * @param fn
+     * @return {Function}
+     */
+    // 自己封装一个功能为'添加方法'方法
+    Function.prototype.addMethod = function(name, fn){   
+        this.prototype[name] = fn;
+        return this;
+    }
+
+    var Methods = function(){};
+    Methods.addMethod('checkName',function(){
+        console.log('checkName3');
+        return this;
+    }).addMethod('checkPasswd',function(){
+        console.log('checkPasswd3');
+        return this;
+    }).addMethod('checkEmail',function(){
+        console.log('checkEmail3');
+        return this;
+    })
+
+
+    var checkObj = new CheckObject();
+    var methods = new Methods();
+    checkObj.checkName().checkPasswd().checkEmail();
+    // console.log(checkObj.checkName())
+    CheckObject2.checkName().checkPasswd().checkEmail();
+    // console.log(CheckObject2.checkName())
+    methods.checkName().checkPasswd().checkEmail();
+
+
+    /**
+     * 类的私有、公有、保护属性和方法
+     */
+
+    var Book = function(id, name, price){
+        //私有属性
+        var num = 100;
+        //私有方法
+        function checkId(){
+
+        }
+
+        //对象公有属性
+        this._id = id;
+        this._name = '';
+        this._price = '';
+
+        //对象公有方法
+        this.sailed = function(){}
+
+        //特权方法，由this创建的方法，可以访问类和对象的私有和公有方法、属性，所以称之为特权方法，即公有方法
+        this.setName = function(nm){
+            this._name = nm;
+        }
+        this.setPrice = function(prc)
+        {
+            this._price = prc;
+        }
+        this.getName = function(){return this._name};
+        this.getPrice = function(){return this._price};
+
+        this.setName(name);
+        this.setPrice(price);
+    }
+    //类静态公有属性(不能通过对象实例访问)
+    Book.isChinese = true;
+    // Book.isChinese= false; 
+    // console.log(Book.isChinese)
+
+    //类静态公有方法(不能通过对象实例访问)
+    Book.Type = function(){console.log('纸质书籍');}
+
+    //Prototype方式
+    Book.prototype = {
+        //公有属性
+        isEnglish:false,
+        //公有方法
+        display:function(){
+            console.log('id = ' + this._id + ', name = ' + this._name + ', price = ' + this._price);
+        }
+    }
+    //-------- Tips --------
+    //通过new关键字创建的对象实质：是对新对象this的不断赋值，并将prototype指向类的prototype所指向的对象
+    //而类的构造函数外面通过点语法定义的属性方法是不会添加到新创建的对象上去的
+
+    var book = new Book(1, 'JS 实践', 26.5);
+    console.log(book.num);//undefined, 对象不能访问类的私有属性
+    console.log(book.isEnglish);//false, 对象可以访问类的公有属性
+    console.log(book._id);//1, 对象可以访问构造器中定义的公有属性
+    console.log(book.isChinese);//undefined, 对象不可以访问类的静态公有属性
+
+
+
+    //------- 继承 ------
+    /**
+     * 类式继承
+     */
+    function SuperClass(){
+        this.superValue = true;
+        this.books = ['JS', 'HTML', 'CSS'];
+    }
+    SuperClass.prototype.getSuperValue = function(){
+        return this.superValue;
+    }
+    // console.log(new SuperClass())
+    function SubClass(){
+        this.subValue = false;
+    }
+    SubClass.prototype = new SuperClass();
+
+    SubClass.prototype.getSubValue = function(){
+        return this.subValue;
+    }
+    // console.log(new SubClass())
+    var instance = new SubClass(); 
+    console.log(instance.getSuperValue());  //true
+    console.log(instance.getSubValue());   //false
+
+    var sub1 = new SubClass();
+    var sub2 = new SubClass();
+    console.log(sub1.books);
+    console.log(sub2.books);
+    sub1.books.push('JS Design');
+    console.log(sub2.books);  //一个对象对父类属性的修改会影响另一个对象继承父类的对象
+
+
+    //------ 构造函数即继承 ------
+    var BookSuperClass = function(newbook)
+    {
+        this.books = ['JS', 'HTML', 'CSS'];
+        this.books.push(newbook);
+    }
+    BookSuperClass.prototype.showBooks = function(){console.log(this.books)}
+
+    var BookSubClass = function(newbook){
+        BookSuperClass.call(this, newbook);
+    }
+
+    var subbook1 = new BookSubClass('subbook1');
+    var subbook2 = new BookSubClass('subbook2');
+    console.group('------ 构造函数即继承 ------');
+    console.log(subbook1.books);
+    console.log(subbook2.books);
+    subbook1.books.push('JS Design');  
+    console.log(subbook2.books);
+    console.log(subbook1.books);
+    console.groupEnd();
+
+    // subbook1.showBooks();//showBooks is undefined
+    // subbook2.showBooks();//showBooks is undefined
+
+
+    //-------- Tips --------
+    //类式继承：通过子类原型prototype对父类的实例化来实现继承
+    //构造函数继承：通过子类构造函数中作用环境中执行一次父类构造函数来实现，即SuperClass.call(this, param)
+
+    //组合式继承，将类式继承和构造函数继承结合起来使用
+    var Books = function(name){
+        this._name = name;
+        this._list = ['JS', 'HTML', 'CSS'];
+    }
+    Books.prototype.getName = function(){return this._name;}
+
+    var ComputingBooks = function(name, price){
+        Books.call(this, name);
+        this._price = price;
+        this._list.push(name);
+    }
+    ComputingBooks.prototype = new Book();
+     // console.log(new Book())
+    // console.log(new ComputingBooks('hjy',22))
+   
+    ComputingBooks.prototype.howMuch = function(){console.log(this._price);}
+
+    var JSDesign = new ComputingBooks('JS 设计模式', 25.6);
+    var CLang = new ComputingBooks('C 语言精讲', 30);
+    console.group('------ 组合式继承 ------');
+    console.log(JSDesign._list);
+    console.log(JSDesign.getName());
+    JSDesign.howMuch();
+    console.log()
+    console.log(CLang._list);
+    console.log(CLang.getName());
+    CLang.howMuch();
+    console.groupEnd();
+
+
+    //------- 原型式继承 ------
+    function inherritObject(o){
+        function F(){};
+        F.prototype = o;
+        return new F();
+    }
+    // console.log(inherritObject())
+    var Parent = {
+        name:'Bob',
+        brothers:['Jerry', 'Tom', 'Kate'],
+        changeName:function(nm){
+            Parent.name = nm;
+        }
+    }//必须这样定义，否则无法使用inherritObject
+
+    console.log('Parent');
+    console.log(Parent);
+    var child1 = inherritObject(Parent);
+    
+
+    child1.changeName('Jack');
+    console.log( child1.name)
+    child1.name="jack"
+    child1.brothers.push('Nancy');// = ['Tom', 'Rose'];
+    child1.brothers.push('Rose');//这种方式会影响父类的属性
+    child1.brothers = ['Nancy', 'Rose'];//这种方式不会影响父类
+    console.group('------- 原型式继承 ------')
+    console.log('child1 :: name = ' + child1.name);
+    console.log(child1.brothers);
+    console.log(new inherritObject(Parent));
+
+    var child2 = inherritObject(Parent);
+    child2.name = 'White';
+    child2.brothers.push('Grase');// = ['Grase'];
+    console.log('child2 :: name = ' + child2.name);
+    console.log(child2.brothers);
+
+    console.log('child1 :: name = ' + child1.name);
+    console.log(child1.brothers);
+
+    console.log('Parent :: name = ' + Parent.name);
+    console.log(Parent.brothers);
+
+    console.groupEnd();
+
+</script>
+</body>
+
+
+
+<script>
+    function load(){
+        var jscode = document.getElementById('sourcecode').innerHTML;
+
+        var showcode = document.getElementById('showcode');
+        showcode.innerHTML = jscode;
+    }
+</script>
+</html>
