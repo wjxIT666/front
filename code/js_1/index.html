@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <script>
+        //构造函数模式
+        function User (name, age) {
+            this.name = name;
+            this.age = age;
+        };
+        User.prototype.sex = '男';
+
+        let student = new User('小红', 19);
+        console.log(student);
+        console.log(Object.getPrototypeOf(student).sex);
+        console.log(student instanceof Object);
+        console.log('sex' in student); //true
+        console.log(student.hasOwnProperty('sex')); //false
+    </script>
+</body>
+</html>
