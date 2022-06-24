@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            overflow: scroll;
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            margin: 20px;
+            padding: 20px;
+            border: 10px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+    </div>
+    <script>
+        //浅拷贝与深拷贝
+        //深拷贝
+        let user = {
+            name: '小明',
+            sister: {
+                name: '小红'
+            },
+            showName: function () {}
+        };
+
+        let newUser = JSON.parse(JSON.stringify(user));
+        //有两个缺点
+        //1.函数属性会丢失
+        //2.无法解决循环引用问题
+        console.log(newUser);
+        console.log(user);
+    </script>
+</body>
+</html>
