@@ -1,0 +1,1 @@
+export const sendToken = value => { return { type: 'setToken', data: value } };

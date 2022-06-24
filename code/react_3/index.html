@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <!-- 引入react核心库 -->
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <!-- 引入react-dom核心库 -->
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <!-- 引入babel解析 -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script type="text/babel">
+        // JSX创建虚拟DOM
+        let App = (<div>
+            <h1>H5引入React</h1>    
+        </div>);
+
+        // JS创建虚拟DOM
+        let App2 = React.createElement('div', { title: '标题' }, React.createElement('h1', {}, 'JS创建虚拟DOM'));
+
+        // 虚拟DOM与真实DOM的区别
+        // 虚拟DOM比较轻，真实DOM比较重，虚拟DOM存在于React的机制中
+        // 虚拟DOM会经过React的处理，变成真实的DOM
+
+        ReactDOM.render(App2, document.getElementById('root'));
+    </script>
+</body>
+</html>
