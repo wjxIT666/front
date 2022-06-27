@@ -1,0 +1,77 @@
+@charset "UTF-8";
+/**
+    1.注释
+    单行注释不会被编译
+    多行注释会被编译
+*/
+/**
+    2.变量
+*/
+.box1 {
+  width: 100px;
+  height: 100px;
+  background-color: pink;
+}
+
+/**
+    3.插值域
+*/
+.box2 {
+  width: 100px;
+  height: 100px;
+  background-color: pink;
+}
+
+/**
+    4.运算
+*/
+.box3 {
+  width: 100px;
+  height: 50px;
+}
+
+/**
+    5.函数
+        内置函数
+        自定义函数
+*/
+.box4 {
+  width: 100px;
+  height: 100px;
+}
+
+/**
+    6.混合
+        优点：继承的缺点
+*/
+.box5 {
+  width: 100px;
+  height: 100px;
+  background-color: pink;
+}
+
+/**
+    7.继承
+        优点：混合的缺点
+*/
+.box6, .box7 {
+  width: 100px;
+  height: 100px;
+  background-color: pink;
+}
+
+/**
+    8.合并
+*/
+.box8 {
+  background: pink, no-repeat;
+  background: pink no-repeat;
+}
+
+/**
+    9.引入外部scss
+*/
+* {
+  margin: 0;
+  padding: 0;
+}

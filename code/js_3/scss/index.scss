@@ -1,0 +1,86 @@
+/**
+    1.注释
+    单行注释不会被编译
+    多行注释会被编译
+*/
+
+/**
+    2.变量
+*/
+$height: 100px;
+.box1 {
+    width: 100px;
+    height: $height;
+    background-color: pink;
+}
+
+/**
+    3.插值域
+*/
+$i: 2;
+.box#{$i} {
+    width: 100px;
+    height: $height;
+    background-color: pink;
+}
+
+/**
+    4.运算
+*/
+.box3 {
+    width: 50px * 2;
+    height: (100px / 2);
+}
+
+/**
+    5.函数
+        内置函数
+        自定义函数
+*/
+@function sum ($n, $m) {
+    @return $n + $m;
+};
+.box4 {
+    width: round(99.5px);
+    height: sum(50px, 50px);
+}
+
+/**
+    6.混合
+        优点：继承的缺点
+*/
+@mixin show ($width, $height, $bgColor) {
+    width: $width;
+    height: $height;
+    background-color: $bgColor;
+}
+.box5 {
+    @include show(100px, 100px, pink);
+}
+
+/**
+    7.继承
+        优点：混合的缺点
+*/
+%background {
+    width: 100px;
+    height: 100px;
+    background-color: pink;
+}
+.box6, .box7 {
+    @extend %background;
+}
+
+/**
+    8.合并
+*/
+$bg: (color: pink, repeat: no-repeat);
+.box8 {
+    background: map-values($bg);
+    background: zip(map-values($bg)...);
+}
+
+/**
+    9.引入外部scss
+*/
+@import './main.scss';
