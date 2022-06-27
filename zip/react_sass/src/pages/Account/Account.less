@@ -1,0 +1,67 @@
+@import '../../less/mixin.less';
+.X86_AccountBreadcrumbStyle {
+    .BreadcrumbPadding ();
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 0.8rem;
+    padding: @padding;
+    font-size: 16px;
+    .X86_AccountBreadcrumbAccount {
+        text-align: right;
+        cursor: pointer;
+        padding-right: 2%;
+        margin-bottom: 2%;
+    }
+}
+.AccountStyle {
+    .ListPadding ();
+    padding: @padding;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-top: 5px solid #f7f7f7;
+    .AccountInfo {
+        border-bottom: 3px solid #f7f7f7;
+        .AccountInfoText {
+            font-weight: 600;
+        }
+        .AccountInfoContent {
+            padding: 0.1rem 0.2rem;
+            display: flex;
+            .AccountInfoContentItem {
+                display: flex;
+                align-items: center;
+                margin-right: 0.3rem;
+                .AccountInfoContentItemSpan {
+                    padding-right: 0.1rem;
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+    .AccountEdit {
+        padding-top: 0.1rem;
+        .AccountEditText {
+            font-weight: 600;
+        }
+        .AccountForm {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .AccountFormItem {
+                margin-top: 0.3rem;
+                display: flex;
+                align-items: center;
+                text-align: right;
+                .AccountFormItemSpan {
+                    padding-right: 0.1rem;
+                    font-size: 13px;
+                    display: inline-block;
+                    width: 1rem;
+                }
+            }
+        }
+    }
+}

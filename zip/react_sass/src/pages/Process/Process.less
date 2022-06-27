@@ -1,0 +1,53 @@
+@import '../../less/mixin.less';
+
+.X86_BreadcrumbStyle {
+    .BreadcrumbPadding ();
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 0.8rem;
+    padding: @padding;
+    font-size: 16px;
+    .X86_BreadcrumbAccount {
+        text-align: right;
+        cursor: pointer;
+        padding-right: 2%;
+        margin-bottom: 2%;
+    }
+    .X86_BreadcrumbTitle {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.ProcessStyle {
+    .ListPadding ();
+    padding: @padding;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-top: 5px solid #f7f7f7;
+    .ProcessQuery {
+        height: 0.6rem;
+        line-height: 0.6rem;
+        border-bottom: 3px solid #f7f7f7;
+        display: flex;
+        align-items: center;
+        &:first-child {
+            border: 0
+        }
+        .ProcessQueryItem {
+            display: flex;
+            margin-right: 0.3rem;
+            .ProcessQueryItemText {
+                padding-right: 0.1rem;
+                font-size: 13px;
+            }
+        }
+    }
+    .ProcessList {
+        height: 100%;
+        padding: 1.5% 0;
+    }
+}
+

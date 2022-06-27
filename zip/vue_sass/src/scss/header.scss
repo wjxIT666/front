@@ -1,0 +1,15 @@
+/**
+    顶栏样式
+*/
+@mixin headerStyle ($bgColor, $lineHeight, $color) {
+    background-color: $bgColor;
+    line-height: $lineHeight;
+    color: $color;
+};
+
+@mixin headerTextStyle ($color, $lineHeight) {
+    color: $color;
+    line-height: $lineHeight;
+};
+
+

@@ -1,0 +1,17 @@
+@import '../../less/variable.less';
+@import '../../less/mixin.less';
+.X86_BreadcrumbStyle {
+    .BreadcrumbPadding ();
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: @height_absolutely;
+    padding: @padding;
+    font-size: 16px;
+    .X86_BreadcrumbAccount {
+        text-align: right;
+        cursor: pointer;
+        padding-right: 2%;
+        margin-bottom: 2%;
+    }
+}
